@@ -1,0 +1,337 @@
+{
+  "accessors": [
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 60928,
+      "max": [24.052095413208008, 24.052087783813477, -0.21815761923789978],
+      "min": [-24.052091598510742, -24.052103042602539, -17.096355438232422],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 731136,
+      "componentType": 5126,
+      "count": 60928,
+      "max": [0.99096834659576416, 0.99097156524658203, 0.99674254655838013],
+      "min": [-0.99096977710723877, -0.99096971750259399, 0.13123565912246704],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 60928,
+      "max": [0.99679762125015259, 0.99679768085479736],
+      "min": [0.0032024187967181206, 0.0032025033142417669],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 91392,
+      "max": [60927],
+      "min": [0],
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5126,
+      "count": 998,
+      "max": [19.959999084472656],
+      "min": [0],
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 4,
+      "componentType": 5126,
+      "count": 998,
+      "max": [
+        0.49973765015602112,
+        0.70710515975952148,
+        0.70710527896881104,
+        0.70710670948028564
+      ],
+      "min": [
+        -0.7071068286895752,
+        -0.49763351678848267,
+        -0.49763357639312744,
+        -0.49973756074905396
+      ],
+      "type": "VEC4"
+    }
+  ],
+  "animations": [
+    {
+      "channels": [
+        {
+          "sampler": 0,
+          "target": {
+            "node": 10,
+            "path": "rotation"
+          }
+        }
+      ],
+      "name": "Circle|CircleAction",
+      "samplers": [
+        {
+          "input": 4,
+          "interpolation": "LINEAR",
+          "output": 5
+        }
+      ]
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "alexantropov1986 (https://sketchfab.com/alexantropov1986)",
+      "license": "SKETCHFAB Standard (https://sketchfab.com/licenses)",
+      "source": "https://sketchfab.com/3d-models/wormhole-black-hole-galaxy-118a6bcc05b54a3695eee43d6ab6ea43",
+      "title": "Wormhole Black Hole Galaxy"
+    },
+    "generator": "Sketchfab-9.28.2",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 365568,
+      "byteOffset": 0,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 487424,
+      "byteOffset": 365568,
+      "byteStride": 8,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 1462272,
+      "byteOffset": 852992,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 3992,
+      "byteOffset": 2315264,
+      "name": "floatBufferViews"
+    },
+    {
+      "buffer": 0,
+      "byteLength": 15968,
+      "byteOffset": 2319256,
+      "byteStride": 16,
+      "name": "floatBufferViews"
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 2335224,
+      "uri": "portal.bin"
+    }
+  ],
+  "extensionsUsed": ["KHR_materials_unlit"],
+  "images": [
+    {
+      "uri": "../textures/wormhole_baseColor.jpeg"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "extensions": {
+        "KHR_materials_unlit": {}
+      },
+      "name": "wormhole",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [1, 1, 1, 1],
+        "baseColorTexture": {
+          "index": 0,
+          "texCoord": 0
+        },
+        "metallicFactor": 0,
+        "roughnessFactor": 1
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Circle_wormhole_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0,
+            "TEXCOORD_0": 2
+          },
+          "indices": 3,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [1],
+      "name": "RootNode (gltf orientation matrix)",
+      "rotation": [-0.70710678118654746, -0, -0, 0.70710678118654757]
+    },
+    {
+      "children": [2],
+      "name": "RootNode (model correction matrix)"
+    },
+    {
+      "children": [3],
+      "matrix": [1, 0, 0, 0, 0, 0, 1, 0, 0, -1, 0, 0, 0, 0, 0, 1],
+      "name": "wormhole3.fbx"
+    },
+    {
+      "children": [4],
+      "name": ""
+    },
+    {
+      "children": [5, 8, 10, 12],
+      "name": "RootNode"
+    },
+    {
+      "children": [6],
+      "name": "Light",
+      "rotation": [
+        0.00040711319888941944,
+        0.77613586187362671,
+        0.00069280900061130524,
+        0.63056522607803345
+      ],
+      "scale": [99.999992370605469, 100, 100],
+      "translation": [
+        -15.445855140686035,
+        164.39572143554688,
+        -9.7726907730102539
+      ]
+    },
+    {
+      "children": [7],
+      "matrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        2.2204460492503131e-16,
+        1,
+        0,
+        0,
+        -1,
+        2.2204460492503131e-16,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "name": ""
+    },
+    {
+      "name": ""
+    },
+    {
+      "children": [9],
+      "name": "Camera",
+      "rotation": [
+        -0.18301273882389069,
+        0.68301266431808472,
+        -0.18301264941692352,
+        0.68301272392272949
+      ],
+      "scale": [100, 100, 100],
+      "translation": [1.9500658512115479, 1423.9251708984375, 2776.56201171875]
+    },
+    {
+      "name": ""
+    },
+    {
+      "children": [11],
+      "name": "Circle",
+      "rotation": [
+        -0.7071068286895752,
+        -6.1817246432838147e-8,
+        -6.1817253538265504e-8,
+        0.70710670948028564
+      ],
+      "scale": [100, 100, 100],
+      "translation": [0, 190.31227111816406, 0]
+    },
+    {
+      "mesh": 0,
+      "name": "Circle_wormhole_0"
+    },
+    {
+      "children": [13],
+      "name": "Light.001",
+      "rotation": [
+        0.00040711319888941944,
+        0.77613586187362671,
+        0.00069280900061130524,
+        0.63056522607803345
+      ],
+      "scale": [99.999992370605469, 100, 100],
+      "translation": [
+        6.5046625137329102,
+        -1005.2410278320312,
+        -9.7726869583129883
+      ]
+    },
+    {
+      "children": [14],
+      "matrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        2.2204460492503131e-16,
+        1,
+        0,
+        0,
+        -1,
+        2.2204460492503131e-16,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "name": ""
+    },
+    {
+      "name": ""
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 10497,
+      "wrapT": 10497
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "OSG_Scene",
+      "nodes": [0]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    }
+  ]
+}
