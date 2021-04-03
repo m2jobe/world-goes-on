@@ -37,6 +37,8 @@ export default class Main {
     this.container = container;
     this.touchControls;
     this.intersected;
+    this.stars;
+    this.starGeo;
 
     // Start Three clock
     this.clock = new THREE.Clock();
@@ -56,7 +58,6 @@ export default class Main {
 
     // Components instantiations
     this.camera = new Camera(this.renderer.threeRenderer);
-    this.controls = new Controls(this.camera.threeCamera, container);
     this.light = new Light(this.scene);
 
     // Create and place lights in scene
@@ -89,20 +90,24 @@ export default class Main {
       // All loaders done now
       this.manager.onLoad = () => {
         // Set up interaction manager with the app now that the model is finished loading
-        /*new Interaction(
+        new Interaction(
           this.renderer.threeRenderer,
           this.scene,
           this.camera.threeCamera,
-          this.controls.threeControls
-        );*/
+          this.touchControls,
+          [this.earth.obj]
+        );
 
-        // Add dat.GUI controls if dev
-        if (Config.isDev) {
-          /*this.meshHelper = new MeshHelper(this.scene, this.earth.obj);
-          if (Config.mesh.enableHelper) this.meshHelper.enable();
-
-          this.gui.load(this, this.earth.obj);*/
-        }
+        this.sphere1 = new Geometry(this.scene);
+        this.sphere1.make("sphere")(2);
+        this.sphere1.place(
+          [
+            this.earth.obj.position.x - 100,
+            this.earth.obj.position.y,
+            this.earth.obj.position.z,
+          ],
+          [0, 0, 0]
+        );
 
         // Everything is now fully loaded
         Config.isLoaded = true;
@@ -164,32 +169,44 @@ export default class Main {
       //Stats.end();
     }
 
-    // Delta time is sometimes needed for certain updates
-    //const delta = this.clock.getDelta();
+    this.starGeo.vertices.forEach((p) => {
+      p.velocity += p.acceleration;
+      p.y -= p.velocity;
 
-    // Call any vendor or module frame updates here
-    ////TWEEN.update();
-    //this.controls.threeControls.update();
+      if (p.y < -200) {
+        p.y = 200;
+        p.velocity = 0;
+      }
+    });
+    this.starGeo.verticesNeedUpdate = true;
+    this.stars.rotation.y += 0.002;
+
+    //Making certain objects spin
+    if (this.earth && this.earth.obj) {
+      this.earth.obj.rotation.z += 0.002;
+    }
+    if (this.moon && this.moon.obj) {
+      this.moon.obj.rotation.z -= 0.002;
+    }
+    if (this.portal && this.portal.obj) {
+      this.portal.obj.rotation.z += 0.02;
+    }
 
     // RAF
     requestAnimationFrame(this.render.bind(this)); // Bind the main class instead of window object
   }
 
   createTheStarsFilledWithPotential() {
-    /*this.geometry = new Geometry(this.scene);
-    this.geometry.make("plane")(150, 150, 10, 10);
-    this.geometry.place([0, -20, 0], [Math.PI / 2, 0, 0]);*/
-
-    const starGeo = new THREE.Geometry();
-    for (let i = 0; i < 6000; i++) {
+    this.starGeo = new THREE.Geometry();
+    for (let i = 0; i < 333; i++) {
       let star = new THREE.Vector3(
         Math.random() * 600 - 300,
         Math.random() * 600 - 300,
         Math.random() * 600 - 300
       );
       star.velocity = 0;
-      star.acceleration = 0.02;
-      starGeo.vertices.push(star);
+      star.acceleration = 0.001;
+      this.starGeo.vertices.push(star);
     }
 
     let sprite = new THREE.TextureLoader().load("assets/images/star.png");
@@ -199,8 +216,8 @@ export default class Main {
       map: sprite,
     });
 
-    const stars = new THREE.Points(starGeo, starMaterial);
-    this.scene.add(stars);
+    this.stars = new THREE.Points(this.starGeo, starMaterial);
+    this.scene.add(this.stars);
   }
 
   createSoundVerbs() {
@@ -225,10 +242,10 @@ export default class Main {
     var container = $("#appContainer");
 
     var options = {
-      speedFactor: 0.5,
+      speedFactor: 0.57,
       delta: 1,
-      rotationFactor: 0.002,
-      maxPitch: 55,
+      rotationFactor: 0.0034,
+      maxPitch: 10000,
       hitTest: true,
       hitTestDistance: 40,
     };

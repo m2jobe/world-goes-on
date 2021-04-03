@@ -34,7 +34,7 @@ export default {
       scale: 0.1,
       type: "gltf",
       position: {
-        x: 50,
+        x: 75,
         y: 0,
         z: 0,
       },
@@ -74,12 +74,12 @@ export default {
   },
   camera: {
     fov: 40,
-    near: 2,
+    near: 1,
     far: 1000,
     aspect: 1,
     posX: 0,
-    posY: 30,
-    posZ: 40,
+    posY: -30,
+    posZ: 0,
   },
   controls: {
     autoRotate: true,
