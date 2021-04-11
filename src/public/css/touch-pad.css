@@ -1,19 +1,17 @@
 .rotation-pad {
   position: absolute;
+  bottom: 0;
 }
 
 .rotation-pad .region {
   position: absolute;
-  width: 100px;
-  height: 100px;
-  background: radial-gradient(
-      rgba(218, 225, 230, 0.25) 5%,
-      rgba(218, 225, 230, 0.5) 95%
-    ),
-    url("../assets/images/cam.png") center center no-repeat;
-  border: 2px solid rgba(218, 225, 230, 0.25);
-  border-radius: 90px;
-  box-shadow: 0px 0px 5px rgba(194, 200, 204, 0.55);
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(rgb(199 2 2 / 25%) 5%, rgb(0 0 0 / 50%) 95%),
+    url(../assets/images/cam.png) center center no-repeat;
+  border: 2px solid rgb(227 0 7 / 25%);
+  border-radius: 180px;
+  box-shadow: 0px 0px 5px rgb(194 200 204 / 55%);
   -webkit-user-select: none;
 }
 
@@ -38,20 +36,18 @@
 
 .movement-pad {
   position: absolute;
+  bottom: 0;
 }
 
 .movement-pad .region {
   position: absolute;
-  width: 100px;
-  height: 100px;
-  background: radial-gradient(
-      rgba(218, 225, 230, 0.25) 5%,
-      rgba(218, 225, 230, 0.5) 95%
-    ),
-    url("../assets/images/nav.png") center center no-repeat;
-  border: 2px solid rgba(218, 225, 230, 0.25);
-  border-radius: 90px;
-  box-shadow: 0px 0px 5px rgba(194, 200, 204, 0.55);
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(rgb(0 147 255 / 25%) 5%, rgb(0 0 0 / 50%) 95%),
+    url(../assets/images/nav.png) center center no-repeat;
+  border: 2px solid rgb(0 117 201 / 25%);
+  border-radius: 180px;
+  box-shadow: 0px 0px 5px rgb(194 200 204 / 55%);
   -webkit-user-select: none;
 }
 

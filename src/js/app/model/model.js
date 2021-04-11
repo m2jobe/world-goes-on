@@ -15,6 +15,7 @@ export default class Model {
 
     this.obj = null;
     this.ref = null;
+    this.animations = null;
   }
 
   load(type, modelIndex = null) {
@@ -51,6 +52,10 @@ export default class Model {
                   mesh = node;
                 }
               });
+            }
+
+            if (gltf.animations) {
+              this.animations = gltf.animations;
             }
 
             this.obj = mesh;

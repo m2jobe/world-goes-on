@@ -54,6 +54,16 @@ export default {
         z: 0,
       },
     },
+    {
+      path: "./assets/models/orb.gltf",
+      scale: 1,
+      type: "gltf",
+      position: {
+        x: 0,
+        y: 0,
+        z: 40,
+      },
+    },
   ],
   texture: {
     path: "./assets/textures/",
@@ -108,7 +118,7 @@ export default {
   directionalLight: {
     enabled: true,
     color: 0xf0f0f0,
-    intensity: 0.4,
+    intensity: 1.2,
     x: -75,
     y: 280,
     z: 150,
@@ -129,7 +139,7 @@ export default {
   pointLight: {
     enabled: true,
     color: 0xffffff,
-    intensity: 0.34,
+    intensity: 1.2,
     distance: 115,
     x: 0,
     y: 0,
@@ -139,7 +149,7 @@ export default {
     enabled: true,
     color: 0xc8c8c8,
     groundColor: 0xffffff,
-    intensity: 0.55,
+    intensity: 1.2,
     x: 0,
     y: 0,
     z: 0,

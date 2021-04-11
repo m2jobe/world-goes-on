@@ -7,10 +7,10 @@
   </head>
 
   <body>
-    <section id="appContainer" class="main">
-      <div id="loading">Loading...</div>
+    <section id="appContainer" class="main"></section>
+    <section id="loading-screen">
+      <div id="loader"></div>
     </section>
-
     <% if (htmlWebpackPlugin.options.env === 'dev') { %>
     <script
       src="https://code.jquery.com/jquery-3.6.0.min.js"

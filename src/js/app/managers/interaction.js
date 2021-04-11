@@ -13,6 +13,7 @@ export default class Interaction {
     this.controls = controls;
     this.targetList = targetList;
     this.raycaster = new THREE.Raycaster();
+    this.takeMeToElsyium = false;
 
     this.timeout = null;
 
@@ -61,8 +62,7 @@ export default class Interaction {
     const intersects = this.raycaster.intersectObjects(this.targetList);
     if (intersects.length > 0) {
       const object = intersects[0].object;
-      alert("clicked");
-      console.log(object);
+      this.takeMeToElsyium = true;
       //object.layers.toggle(BLOOM_SCENE);
       //render();
     }

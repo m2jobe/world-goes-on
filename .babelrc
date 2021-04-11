@@ -1,1 +1,12 @@
-{ "presets": ["@babel/preset-env"] }
+{
+  "presets": [
+    ["@babel/preset-env", {
+      "debug": false,
+      "modules": false,
+      "useBuiltIns": false
+    }], 
+  ],
+  "plugins": [
+    "@babel/plugin-transform-runtime"
+  ]
+}
