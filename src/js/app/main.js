@@ -20,6 +20,7 @@ import Config from "./../data/config";
 
 import { TouchControls } from "../utils/touch-controls.js";
 import Geometry from "./components/geometry";
+
 // -- End of imports
 
 // This class instantiates and ties all of the components together, starts the loading process and renders the main loop
@@ -185,6 +186,8 @@ export default class Main {
       this.interactionManager &&
       this.interactionManager.takeMeToElsyium == true
     ) {
+      // const container = document.getElementById("appContainer");
+      //return new Main(container);
       /*this.touchControls.setPosition(
         this.touchControls.fpsBody.position.x,
         this.touchControls.fpsBody.position.y,
