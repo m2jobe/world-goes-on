@@ -80,7 +80,6 @@ export default class Geometry {
     await loader.load(
       "./assets/fonts/helvetiker_regular.typeface.json",
       function (font) {
-        console.log(font);
         that.geo = new THREE.TextBufferGeometry(text, {
           font: font,
           size: size,

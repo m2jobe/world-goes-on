@@ -11,12 +11,12 @@
     <section id="loading-screen">
       <div id="loader"></div>
     </section>
-    <% if (htmlWebpackPlugin.options.env === 'dev') { %>
     <script
       src="https://code.jquery.com/jquery-3.6.0.min.js"
       integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
       crossorigin="anonymous"
     ></script>
+    <% if (htmlWebpackPlugin.options.env === 'dev') { %>
     <script src="js/rStats.js"></script>
     <script src="js/rStats.extras.js"></script>
     <script src="js/dat.gui.min.js"></script>
