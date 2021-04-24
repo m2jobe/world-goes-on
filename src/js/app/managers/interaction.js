@@ -63,6 +63,7 @@ export default class Interaction {
     if (intersects.length > 0) {
       const object = intersects[0].object;
       this.takeMeToElsyium = true;
+      window.location.replace("elsyium.html");
       //object.layers.toggle(BLOOM_SCENE);
       //render();
     }

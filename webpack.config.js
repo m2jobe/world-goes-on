@@ -130,6 +130,12 @@ module.exports = (env) => {
         filename: "../index.html",
         env: env.NODE_ENV,
       }),
+      new HtmlWebpackPlugin({
+        title: "World Goes On",
+        template: path.join(__dirname, "src/html/elsyium.html"),
+        filename: "../elsyium.html",
+        env: env.NODE_ENV,
+      }),
       new MiniCssExtractPlugin({
         filename: "../css/[name].css",
         chunkFilename: "../css/[id].css",

@@ -16,7 +16,7 @@ import Model from "./model/model";
 import Interaction from "./managers/interaction";
 
 // data
-import Config from "./../data/config";
+import Config from "../data/config";
 
 import { TouchControls } from "../utils/touch-controls.js";
 import Geometry from "./components/geometry";
@@ -24,7 +24,7 @@ import Geometry from "./components/geometry";
 // -- End of imports
 
 // This class instantiates and ties all of the components together, starts the loading process and renders the main loop
-export default class Main {
+export default class Elysium {
   constructor(container) {
     Config.isLoaded = false;
 
@@ -43,6 +43,7 @@ export default class Main {
 
     // Main scene creation
     this.scene = new THREE.Scene();
+    
     this.scene.fog = new THREE.FogExp2(Config.fog.color, Config.fog.near);
 
     // Get Device Pixel Ratio first for retina
@@ -52,15 +53,17 @@ export default class Main {
 
     // Main renderer constructor
     this.renderer = new Renderer(this.scene, container);
-    this.renderer.threeRenderer.setClearColor(0x000000, 0);
+    this.renderer.threeRenderer.setClearColor(0xf5fafa, 1);
 
     // Components instantiations
     this.camera = new Camera(this.renderer.threeRenderer);
     this.light = new Light(this.scene);
+    this.light.ambientLight = new THREE.AmbientLight("#eeafcf");
 
     // Create and place lights in scene
-    const lights = ["ambient", "point", "hemi"];
-    lights.forEach((light) => this.light.place(light));
+
+    const lights = ["ambient"];
+    lights.forEach((light) =>  this.light.place(light));
 
     // Instantiate texture class
     this.texture = new Texture();
@@ -70,23 +73,8 @@ export default class Main {
       this.manager = new THREE.LoadingManager();
 
       // Textures loaded, load model
-      this.earth = new Model(this.scene, this.manager, this.texture.textures);
-      this.earth.load(Config.models[0].type, 0);
-
-      // Textures loaded, load model
-      this.moon = new Model(this.scene, this.manager, this.texture.textures);
-      this.moon.load(Config.models[1].type, 1);
-
-      this.portal = new Model(this.scene, this.manager, this.texture.textures);
-      this.portal.load(Config.models[1].type, 2);
-
-      this.orb1 = new Model(this.scene, this.manager, this.texture.textures);
-      this.orb1.load(Config.models[0].type, 3);
-
-      // onProgress callback
-      this.manager.onProgress = (item, loaded, total) => {
-        console.log(`${item}: ${loaded} ${total}`);
-      };
+      this.elsyium = new Model(this.scene, this.manager, this.texture.textures);
+      this.elsyium.load("gltf", 4);
 
       // All loaders done now
       this.manager.onLoad = async () => {
@@ -96,27 +84,6 @@ export default class Main {
           this.scene,
           this.camera.threeCamera,
           this.touchControls,
-          [this.earth.obj, this.orb1.obj]
-        );
-
-        this.orb1Animation = new Animation(
-          this.orb1.obj,
-          this.orb1.animations[0]
-        );
-
-        this.orb1Text = new Geometry(this.scene);
-        await this.orb1Text.createText(
-          "Elysium ",
-          2,
-          1,
-          6,
-          -4.3,
-          -6,
-          40,
-          0,
-          0,
-          0,
-          0xffff00
         );
 
         Config.isLoaded = true;
@@ -149,35 +116,11 @@ export default class Main {
     // Call render function and pass in created scene and camera
     this.renderer.render(this.scene, this.camera.threeCamera);
 
-    // Make the stars move and spin
-    this.starGeo.vertices.forEach((p) => {
-      p.velocity += p.acceleration;
-      p.y -= p.velocity;
-
-      if (p.y < -200) {
-        p.y = 200;
-        p.velocity = 0;
-      }
-    });
-    this.starGeo.verticesNeedUpdate = true;
-    this.stars.rotation.y += 0.002;
-
-    //Making certain objects spin
-    if (this.earth && this.earth.obj) {
-      this.earth.obj.rotation.z += 0.002;
-    }
-    if (this.moon && this.moon.obj) {
-      this.moon.obj.rotation.z -= 0.002;
-    }
-    if (this.portal && this.portal.obj) {
-      this.portal.obj.rotation.z += 0.02;
-    }
-
     // Enter scene auto tavel
     if (this.touchControls && !this.giveUserBackControl) {
       this.touchControls.fpsBody.position.z -=
-        this.touchControls.fpsBody.position.z >= 120 ? 1 : 0;
-      if (this.touchControls.fpsBody.position.z == 120) {
+        this.touchControls.fpsBody.position.z >= 200 ? 5 : 0;
+      if (this.touchControls.fpsBody.position.z == 200) {
         this.giveUserBackControl = true;
       }
     }
@@ -248,16 +191,19 @@ export default class Main {
     var container = $("#appContainer");
 
     var options = {
-      speedFactor: 0.75,
+      speedFactor: 3,
       delta: 1,
       rotationFactor: 0.006,
+      maxPitch: 100,
+      hitTest: false,
+      hitTestDistance: 40,
     };
     this.touchControls = new TouchControls(
       container,
       this.camera.threeCamera,
       options
     );
-    this.touchControls.setPosition(0, 20, 300);
+    this.touchControls.setPosition(5, 59, 1500);
     this.touchControls.addToScene(this.scene);
     // controls.setRotation(0.15, -0.15);
   }

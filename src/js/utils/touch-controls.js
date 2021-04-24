@@ -385,7 +385,7 @@ export function TouchControls(container, camera, options) {
   self.enabled = true;
 
   self.mouse = new THREE.Vector2();
-
+  self.pitch = 0;
   // Creating rotation pad:
   self.rotationPad = new RotationPad(container);
   $(self.rotationPad).on("YawPitch", function (event) {
@@ -393,6 +393,7 @@ export function TouchControls(container, camera, options) {
       event.detail.deltaX,
       event.detail.deltaY
     );
+    self.pitch = rotation.rx;
     self.setRotation(rotation.rx, rotation.ry);
   });
 
@@ -594,8 +595,11 @@ export function TouchControls(container, camera, options) {
     velocity.x += -1 * velocity.x * 0.75 * self.config.delta;
     velocity.z += -1 * velocity.z * 0.75 * self.config.delta;
 
-    if (moveForward && !lockMoveForward)
+    if (moveForward && !lockMoveForward) {
       velocity.z -= ztouch * self.config.speedFactor * self.config.delta;
+      
+      
+    }
     if (moveBackward && !lockMoveBackward)
       velocity.z += ztouch * self.config.speedFactor * self.config.delta;
 
@@ -610,7 +614,7 @@ export function TouchControls(container, camera, options) {
   };
 
   self.hitTest = function () {
-    self.unlockAllDirections();
+    /*self.unlockAllDirections();
     hitObjects = [];
     var cameraDirection = self
       .getDirection2(new THREE.Vector3(0, 0, 0))
@@ -627,13 +631,13 @@ export function TouchControls(container, camera, options) {
         intersects.length > 0 &&
         intersects[0].distance < self.config.hitTestDistance
       ) {
-        lockDirectionByIndex(i);
+        //lockDirectionByIndex(i);
         hitObjects.push(intersects[0]);
         // console.log(intersects[0].object.name, i);
       }
     }
 
-    return hitObjects;
+    return hitObjects;*/
   };
 
   self.getDirection2 = function (v) {

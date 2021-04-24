@@ -64,6 +64,16 @@ export default {
         z: 40,
       },
     },
+    {
+        path: "./assets/models/elsyium.gltf",
+        scale: 1,
+        type: "gltf",
+        position: {
+          x: 0,
+          y: 0,
+          z: 0,
+        }
+    },
   ],
   texture: {
     path: "./assets/textures/",
