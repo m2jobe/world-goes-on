@@ -18,7 +18,7 @@ function init() {
   if (!Detector.webgl) {
     Detector.addGetWebGLMessage();
   } else {
-    if (window.location.pathname == "/elsyium.html") {
+    if (window.location.pathname.includes("elsyium.html")) {
       const container = document.getElementById("appContainer");
       new Elsyium(container);
     } else {
