@@ -1,7 +1,27 @@
-.rotation-pad {
-    margin-bottom:10%;
-  position: absolute;
-  bottom: 0;
+
+
+@media only screen and (min-width: 768px) {
+  .rotation-pad {
+    position: absolute;
+    bottom: 0;
+  }
+
+  .movement-pad {
+    position: absolute;
+    bottom: 0;
+  }
+  
+
+}
+
+@media only screen and (min-width: 480px) {
+  /* For mobile phones: */
+  .rotation-pad {
+    bottom: 15%  !important;
+  }
+  .movement-pad {
+    bottom: 15%  !important;
+  }
 }
 
 .rotation-pad .region {
@@ -35,12 +55,9 @@
   -webkit-user-select: none;
 }
 
-.movement-pad {
-  position: absolute;
-  bottom: 0;
-}
 
 .movement-pad .region {
+  bottom: 10%;
   position: absolute;
   width: 200px;
   height: 200px;

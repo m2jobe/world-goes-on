@@ -98,7 +98,7 @@ export default class Elysium {
       };
     });
 
-    this.createTheStarsFilledWithPotential();
+    //this.createTheStarsFilledWithPotential();
     this.createSoundVerbs();
     this.addControls();
   }
@@ -116,14 +116,7 @@ export default class Elysium {
     // Call render function and pass in created scene and camera
     this.renderer.render(this.scene, this.camera.threeCamera);
 
-    // Enter scene auto tavel
-    if (this.touchControls && !this.giveUserBackControl) {
-      this.touchControls.fpsBody.position.z -=
-        this.touchControls.fpsBody.position.z >= 200 ? 5 : 0;
-      if (this.touchControls.fpsBody.position.z == 200) {
-        this.giveUserBackControl = true;
-      }
-    }
+  
 
     if (
       this.interactionManager &&

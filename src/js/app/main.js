@@ -14,6 +14,7 @@ import Model from "./model/model";
 
 // Managers
 import Interaction from "./managers/interaction";
+import Controls from "./components/controls";
 
 // data
 import Config from "./../data/config";
@@ -56,6 +57,7 @@ export default class Main {
 
     // Components instantiations
     this.camera = new Camera(this.renderer.threeRenderer);
+    this.controls = new Controls(this.camera.threeCamera, container);
     this.light = new Light(this.scene);
 
     // Create and place lights in scene
@@ -95,7 +97,7 @@ export default class Main {
           this.renderer.threeRenderer,
           this.scene,
           this.camera.threeCamera,
-          this.touchControls,
+          this.controls.threeControls,
           [this.earth.obj, this.orb1.obj]
         );
 
@@ -133,16 +135,10 @@ export default class Main {
 
     this.createTheStarsFilledWithPotential();
     this.createSoundVerbs();
-    this.addControls();
-  }
-
-  onTransitionEnd(event) {
-    const element = event.target;
-    element.remove();
   }
 
   render() {
-    this.touchControls.update();
+    //this.touchControls.update();
     if (this.orb1Animation) {
       this.orb1Animation.update(this.clock.getDelta());
     }
@@ -150,6 +146,53 @@ export default class Main {
     this.renderer.render(this.scene, this.camera.threeCamera);
 
     // Make the stars move and spin
+    this.giveSpinToTheStars();
+
+    this.rotateTheCelestials();
+
+    this.controls.threeControls.update();
+    requestAnimationFrame(this.render.bind(this)); // Bind the main class instead of window object
+  }
+
+  createTheStarsFilledWithPotential() {
+    this.starGeo = new THREE.Geometry();
+    for (let i = 0; i < 693; i++) {
+      let star = new THREE.Vector3(
+        Math.random() * 600 - 300,
+        Math.random() * 600 - 300,
+        Math.random() * 600 - 300
+      );
+      star.velocity = 0;
+      star.acceleration = 0.001;
+      this.starGeo.vertices.push(star);
+    }
+
+    let sprite = new THREE.TextureLoader().load("assets/images/sun.png");
+    let starMaterial = new THREE.PointsMaterial({
+      color: 0xffffff,
+      size: 4,
+      map: sprite,
+      transparent: true,
+    });
+
+    this.stars = new THREE.Points(this.starGeo, starMaterial);
+    this.scene.add(this.stars);
+  }
+
+  rotateTheCelestials() {
+    //Making certain objects spin
+    if (this.earth && this.earth.obj) {
+      this.earth.obj.rotation.z += 0.002;
+    }
+    if (this.moon && this.moon.obj) {
+      this.moon.obj.rotation.z -= 0.002;
+    }
+    if (this.portal && this.portal.obj) {
+      this.portal.obj.rotation.z += 0.02;
+    }
+  }
+
+  giveSpinToTheStars() {
     this.starGeo.vertices.forEach((p) => {
       p.velocity += p.acceleration;
       p.y -= p.velocity;
@@ -161,69 +204,6 @@ export default class Main {
     });
     this.starGeo.verticesNeedUpdate = true;
     this.stars.rotation.y += 0.002;
-
-    //Making certain objects spin
-    if (this.earth && this.earth.obj) {
-      this.earth.obj.rotation.z += 0.002;
-    }
-    if (this.moon && this.moon.obj) {
-      this.moon.obj.rotation.z -= 0.002;
-    }
-    if (this.portal && this.portal.obj) {
-      this.portal.obj.rotation.z += 0.02;
-    }
-
-    // Enter scene auto tavel
-    if (this.touchControls && !this.giveUserBackControl) {
-      this.touchControls.fpsBody.position.z -=
-        this.touchControls.fpsBody.position.z >= 120 ? 1 : 0;
-      if (this.touchControls.fpsBody.position.z == 120) {
-        this.giveUserBackControl = true;
-      }
-    }
-
-    if (
-      this.interactionManager &&
-      this.interactionManager.takeMeToElsyium == true
-    ) {
-      // const container = document.getElementById("appContainer");
-      //return new Main(container);
-      /*this.touchControls.setPosition(
-        this.touchControls.fpsBody.position.x,
-        this.touchControls.fpsBody.position.y,
-        this.touchControls.fpsBody.position.z - 1
-      );
-
-      this.touchControls.setRotation(-Math.PI / 2, -Math.PI / 2 - 10);
-
-      this.interactionManager.takeMeToElsyium = false;*/
-    }
-    // RAF
-    requestAnimationFrame(this.render.bind(this)); // Bind the main class instead of window object
-  }
-
-  createTheStarsFilledWithPotential() {
-    this.starGeo = new THREE.Geometry();
-    for (let i = 0; i < 333; i++) {
-      let star = new THREE.Vector3(
-        Math.random() * 600 - 300,
-        Math.random() * 600 - 300,
-        Math.random() * 600 - 300
-      );
-      star.velocity = 0;
-      star.acceleration = 0.001;
-      this.starGeo.vertices.push(star);
-    }
-
-    let sprite = new THREE.TextureLoader().load("assets/images/star.png");
-    let starMaterial = new THREE.PointsMaterial({
-      color: 0xaaaaaa,
-      size: 0.7,
-      map: sprite,
-    });
-
-    this.stars = new THREE.Points(this.starGeo, starMaterial);
-    this.scene.add(this.stars);
   }
 
   createSoundVerbs() {
@@ -243,22 +223,8 @@ export default class Main {
     });
   }
 
-  addControls() {
-    // Controls
-    var container = $("#appContainer");
-
-    var options = {
-      speedFactor: 0.75,
-      delta: 1,
-      rotationFactor: 0.006,
-    };
-    this.touchControls = new TouchControls(
-      container,
-      this.camera.threeCamera,
-      options
-    );
-    this.touchControls.setPosition(0, 20, 300);
-    this.touchControls.addToScene(this.scene);
-    // controls.setRotation(0.15, -0.15);
+  onTransitionEnd(event) {
+    const element = event.target;
+    element.remove();
   }
 }

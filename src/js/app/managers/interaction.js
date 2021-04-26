@@ -52,7 +52,7 @@ export default class Interaction {
   }
 
   onPointerDown(event) {
-    event.preventDefault();
+    //event.preventDefault();
 
     var mouse = {};
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;

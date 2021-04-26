@@ -73,7 +73,7 @@ export default class Model {
             scene.scale.multiplyScalar(
               Config.models[modelIndex || Config.model.selected].scale
             );
-
+            
             // Add to scene
             this.scene.add(scene);
           },

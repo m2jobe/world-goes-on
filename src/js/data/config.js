@@ -98,8 +98,8 @@ export default {
     far: 1000,
     aspect: 1,
     posX: 0,
-    posY: -30,
-    posZ: 0,
+    posY: 69,
+    posZ: 234,
   },
   controls: {
     autoRotate: true,
