@@ -1,27 +1,11 @@
-
-
-@media only screen and (min-width: 768px) {
-  .rotation-pad {
-    position: absolute;
-    bottom: 0;
-  }
-
-  .movement-pad {
-    position: absolute;
-    bottom: 0;
-  }
-  
-
+.rotation-pad {
+  position: absolute;
+  bottom: 0;
 }
 
-@media only screen and (min-width: 480px) {
-  /* For mobile phones: */
-  .rotation-pad {
-    bottom: 15%  !important;
-  }
-  .movement-pad {
-    bottom: 15%  !important;
-  }
+.movement-pad {
+  position: absolute;
+  bottom: 0;
 }
 
 .rotation-pad .region {
@@ -54,7 +38,6 @@
   font: 24px/44px "Courier New", Courier, monospace;
   -webkit-user-select: none;
 }
-
 
 .movement-pad .region {
   bottom: 10%;

@@ -63,7 +63,32 @@ export default class Interaction {
     if (intersects.length > 0) {
       const object = intersects[0].object;
       this.takeMeToElsyium = true;
-      window.location.replace("elsyium.html");
+      var dialog = new $.Zebra_Dialog({
+        type: false,
+        title: "Transporting",
+        message: "Would you like to visit Elsyium?",
+        show_close_button: true,
+        buttons: [
+          {
+            caption: "Cancel",
+            custom_class: "cancel_dialog",
+            default_confirmation: true,
+            callback: function () {
+              dialog.close();
+            },
+          },
+          {
+            caption: "Go",
+            custom_class: "go_dialog",
+            callback: function () {
+              window.location.replace("elsyium.html")
+            },
+          },
+        ],
+      });
+
+      //window.location.replace("elsyium.html");
+      //alert("Would you like to travel to elsyium");
       //object.layers.toggle(BLOOM_SCENE);
       //render();
     }

@@ -595,11 +595,8 @@ export function TouchControls(container, camera, options) {
     velocity.x += -1 * velocity.x * 0.75 * self.config.delta;
     velocity.z += -1 * velocity.z * 0.75 * self.config.delta;
 
-    if (moveForward && !lockMoveForward) {
+    if (moveForward && !lockMoveForward)
       velocity.z -= ztouch * self.config.speedFactor * self.config.delta;
-      
-      
-    }
     if (moveBackward && !lockMoveBackward)
       velocity.z += ztouch * self.config.speedFactor * self.config.delta;
 

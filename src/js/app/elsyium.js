@@ -1,12 +1,12 @@
 // Global imports -
 import * as THREE from "three";
+import TWEEN from "@tweenjs/tween.js";
 
 // Local imports -
 // Components
 import Renderer from "./components/renderer";
 import Camera from "./components/camera";
 import Light from "./components/light";
-import Animation from "./components/animation";
 
 // Model
 import Texture from "./model/texture";
@@ -19,7 +19,6 @@ import Interaction from "./managers/interaction";
 import Config from "../data/config";
 
 import { TouchControls } from "../utils/touch-controls.js";
-import Geometry from "./components/geometry";
 
 // -- End of imports
 
@@ -98,8 +97,7 @@ export default class Elysium {
       };
     });
 
-    //this.createTheStarsFilledWithPotential();
-    this.createSoundVerbs();
+    //this.createSoundVerbs();
     this.addControls();
   }
 
@@ -109,6 +107,8 @@ export default class Elysium {
   }
 
   render() {
+    TWEEN.update();
+
     this.touchControls.update();
     if (this.orb1Animation) {
       this.orb1Animation.update(this.clock.getDelta());
@@ -117,49 +117,7 @@ export default class Elysium {
     this.renderer.render(this.scene, this.camera.threeCamera);
 
   
-
-    if (
-      this.interactionManager &&
-      this.interactionManager.takeMeToElsyium == true
-    ) {
-      // const container = document.getElementById("appContainer");
-      //return new Main(container);
-      /*this.touchControls.setPosition(
-        this.touchControls.fpsBody.position.x,
-        this.touchControls.fpsBody.position.y,
-        this.touchControls.fpsBody.position.z - 1
-      );
-
-      this.touchControls.setRotation(-Math.PI / 2, -Math.PI / 2 - 10);
-
-      this.interactionManager.takeMeToElsyium = false;*/
-    }
-    // RAF
     requestAnimationFrame(this.render.bind(this)); // Bind the main class instead of window object
-  }
-
-  createTheStarsFilledWithPotential() {
-    this.starGeo = new THREE.Geometry();
-    for (let i = 0; i < 333; i++) {
-      let star = new THREE.Vector3(
-        Math.random() * 600 - 300,
-        Math.random() * 600 - 300,
-        Math.random() * 600 - 300
-      );
-      star.velocity = 0;
-      star.acceleration = 0.001;
-      this.starGeo.vertices.push(star);
-    }
-
-    let sprite = new THREE.TextureLoader().load("assets/images/star.png");
-    let starMaterial = new THREE.PointsMaterial({
-      color: 0xaaaaaa,
-      size: 0.7,
-      map: sprite,
-    });
-
-    this.stars = new THREE.Points(this.starGeo, starMaterial);
-    this.scene.add(this.stars);
   }
 
   createSoundVerbs() {
@@ -196,7 +154,7 @@ export default class Elysium {
       this.camera.threeCamera,
       options
     );
-    this.touchControls.setPosition(5, 59, 1500);
+    this.touchControls.setPosition(5, 10, 1500);
     this.touchControls.addToScene(this.scene);
     // controls.setRotation(0.15, -0.15);
   }

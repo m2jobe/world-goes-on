@@ -1,5 +1,6 @@
 // Global imports -
 import * as THREE from "three";
+import TWEEN from "@tweenjs/tween.js";
 
 // Local imports -
 // Components
@@ -98,7 +99,7 @@ export default class Main {
           this.scene,
           this.camera.threeCamera,
           this.controls.threeControls,
-          [this.earth.obj, this.orb1.obj]
+          [this.orb1.obj]
         );
 
         this.orb1Animation = new Animation(
@@ -138,7 +139,10 @@ export default class Main {
   }
 
   render() {
-    //this.touchControls.update();
+    // Call any vendor or module frame updates here
+    TWEEN.update();
+    this.controls.threeControls.update();
+
     if (this.orb1Animation) {
       this.orb1Animation.update(this.clock.getDelta());
     }
@@ -150,13 +154,12 @@ export default class Main {
 
     this.rotateTheCelestials();
 
-    this.controls.threeControls.update();
     requestAnimationFrame(this.render.bind(this)); // Bind the main class instead of window object
   }
 
   createTheStarsFilledWithPotential() {
     this.starGeo = new THREE.Geometry();
-    for (let i = 0; i < 693; i++) {
+    for (let i = 0; i < 639; i++) {
       let star = new THREE.Vector3(
         Math.random() * 600 - 300,
         Math.random() * 600 - 300,
@@ -170,7 +173,7 @@ export default class Main {
     let sprite = new THREE.TextureLoader().load("assets/images/sun.png");
     let starMaterial = new THREE.PointsMaterial({
       color: 0xffffff,
-      size: 4,
+      size: 3,
       map: sprite,
       transparent: true,
     });
