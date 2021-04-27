@@ -93,9 +93,9 @@ export default {
     near: 0.0008,
   },
   camera: {
-    fov: 40,
+    fov: 140,
     near: 1,
-    far: 1000,
+    far: 500,
     aspect: 1,
     posX: 0,
     posY: 69,

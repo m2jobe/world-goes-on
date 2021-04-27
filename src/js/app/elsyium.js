@@ -109,6 +109,15 @@ export default class Elysium {
   render() {
     TWEEN.update();
 
+    // Enter scene auto tavel
+    if (this.touchControls && !this.giveUserBackControl) {
+      this.touchControls.fpsBody.position.z -=
+        this.touchControls.fpsBody.position.z >= -80 ? 5 : 0;
+      if (this.touchControls.fpsBody.position.z == -80) {
+        this.giveUserBackControl = true;
+      }
+    }
+
     this.touchControls.update();
     if (this.orb1Animation) {
       this.orb1Animation.update(this.clock.getDelta());
@@ -145,7 +154,7 @@ export default class Elysium {
       speedFactor: 3,
       delta: 1,
       rotationFactor: 0.006,
-      maxPitch: 100,
+      maxPitch: 10,
       hitTest: false,
       hitTestDistance: 40,
     };
@@ -154,7 +163,7 @@ export default class Elysium {
       this.camera.threeCamera,
       options
     );
-    this.touchControls.setPosition(5, 10, 1500);
+    this.touchControls.setPosition(5, 5, 1500);
     this.touchControls.addToScene(this.scene);
     // controls.setRotation(0.15, -0.15);
   }
